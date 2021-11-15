@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+section .drag-area {
+  border: 2px dashed #c4c4c4;
+  height: 400px;
+  width: 600px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 30px 0;
+}
+
+section .drag-area button {
+  padding: 10px 25px;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  background-color: #3b84d2;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+section .drag-area button.upload {
+  background-color: #0e9e25;
+}
+
+section .drag-area.active {
+  border: 2px solid #c4c4c4;
+}
+
+section .drag-area header,
+section .drag-area span {
+  font-size: 18px;
+  font-weight: 500;
+  color: #6f6f6f;
+}
+
+section .drag-area span {
+  margin: 10px 0 15px 0;
+}
+
+section .drag-area img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+section .preview-area {
+  width: 600px;
+  margin: 0;
+}
+
+section .response {
+  width: 600px;
+  margin: 30px 0;
+}
+
+section .preview-area div {
+  display: inline-block;
+  width: 196px;
+  height: 196px;
+  position: relative;
+  box-sizing: border-box;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  margin: 0 2px;
+}
+
+section .preview-area div img {
+  max-width: 196px;
+  max-height: 196px;
+  height: auto;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
