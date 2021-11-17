@@ -84,6 +84,7 @@ section .preview-area div {
   background-color: #f3f3f3;
   border-radius: 5px;
   margin: 0 2px;
+  overflow: hidden;
 }
 
 section .preview-area div img {
@@ -96,4 +97,28 @@ section .preview-area div img {
   left: 0;
   bottom: 0;
   right: 0;
+}
+
+section .preview-area div span {
+  display: block;
+  bottom: 0;
+  position: absolute;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  background-color: rgba(59, 132, 210, 0.2);
+  cursor: pointer;
+  color: white;
+}
+
+section .preview-area div span:hover {
+  background-color: rgb(59, 132, 210);
+}
+
+section .preview-area div.success {
+  background-color: #b3efb3;
+}
+
+section .preview-area div.success span {
+  display: none;
 }

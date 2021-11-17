@@ -14,7 +14,7 @@ select.onclick = () => {
 upload.onclick = () => {
   if (images || images.length > 0) {
     // https://uploadcare.com/blog/file-upload-ajax/
-    let formData = new FormData();
+    let formData = new FormData(), result, prev, name;
     for (let key in images) {
       if (images.hasOwnProperty(key)) {
         formData.append("images[" + key + "]", images[key], images[key].name);
@@ -31,6 +31,16 @@ upload.onclick = () => {
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
         response.innerHTML = xmlHttp.responseText;
+        result = JSON.parse(xmlHttp.responseText);
+        console.log(result);
+        if (result.files && result.files.length > 0) {
+          for (let key in result.files) {
+            name = result.files[key];
+            prev = document.getElementById(name);
+            prev.className = 'success';
+            delete images[name];
+          }
+        }
       } else {
         response.innerHTML = 'Upload error. Try again.';
       }
@@ -98,11 +108,18 @@ function showFile(files) {
 
 function createPreviewObject(image, hs) {
   let div = document.createElement('div'),
-      img = document.createElement('img');
+      img = document.createElement('img'),
+      span_remove = document.createElement('span');
 
   img.src = image;
-  div.className = 'image';
   div.id = hs;
+  span_remove.innerText = 'Удалить';
+  span_remove.className = 'remove';
+  span_remove.onclick= function() {
+    document.getElementById(hs).remove();
+    delete images[hs];
+  }
   div.appendChild(img);
+  div.appendChild(span_remove);
   previewArea.appendChild(div);
 }

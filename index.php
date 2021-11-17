@@ -18,7 +18,15 @@
     <input type="file" name="images" id="fileAjax" hidden multiple>
   </div>
   <div class="preview-area">
-
+    <?php
+    if (file_exists("23items.db")) {
+      $db = new SQLite3("23items.db");
+      $result = $db->query('SELECT * FROM images');
+      while ($row = $result->fetchArray()) {
+        echo "<div class='success'><img src='/uploads/{$row['name']}'/></div>";
+      }
+    }
+    ?>
   </div>
   <div class="response">
 
