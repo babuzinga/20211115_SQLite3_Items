@@ -12,11 +12,11 @@ if (!file_exists("23items.db")) {
   foreach ($_FILES["images"]["error"] as $key => $error) {
     if ($error == UPLOAD_ERR_OK) {
       $filename = $_FILES["images"]["name"][$key];
-      $extension = substr(strrchr($filename, '.'), 1);
+      $extension = mb_strtolower(substr(strrchr($filename, '.'), 1));
       $filename_new = $key.'.'.$extension;
       move_uploaded_file( $_FILES["images"]["tmp_name"][$key], "uploads/$filename_new");
-      $result[] = $key;
       $db->exec("INSERT OR IGNORE INTO images (name, dt) VALUES ('$filename_new', CURRENT_TIMESTAMP) ");
+      $result[$db->lastInsertRowID()] = $key;
     }
   }
   $db->close();
