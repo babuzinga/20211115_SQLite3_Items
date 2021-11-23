@@ -1,4 +1,5 @@
 <?php include_once __DIR__ . '/header.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
 
   <div>
     <input type="text" name="group_name" value="" placeholder="Название новой группы">
-    <button type="button" onclick="addItem('group', 'group_name', 0)">Добавить</button>
+    <button type="button" onclick="controlItem('group', 'group_name', 'create', false, false)">Добавить</button>
   </div>
 
   <div>
@@ -25,15 +26,18 @@
         $result = $db->query('
           SELECT COUNT(products.uuid) AS cnt, groups.* 
           FROM groups 
-          LEFT JOIN products ON products.group_uuid = groups.uuid 
+          LEFT JOIN products ON products.group_uuid = groups.uuid AND products.status = 0
+          WHERE groups.status = 0
           GROUP BY groups.uuid
           ORDER BY groups.dt
         ');
         while ($row = $result->fetchArray()) :
       ?>
-        <li>
-          <a href="/group.php?u=<?= $row['uuid']; ?>"><?= $row['title'], !empty($row['cnt']) ? " ({$row['cnt']})" : ''; ?></a>
-          <span class='delete' onclick="deleteItem('group', '<?= $row['uuid']; ?>')">[ Удалить ]</span>
+        <li data-uuid="<?= $row['uuid']; ?>">
+          <?= !empty($row['cnt']) ? "[{$row['cnt']}]" : ''; ?>
+          <a href="/group.php?u=<?= $row['uuid']; ?>"><?= $row['title']; ?></a>
+          <span class='rename' onclick="renameItem('group', '<?= $row['uuid']; ?>')"></span>
+          <span class='delete' onclick="controlItem('group', false, 'delete', '<?= $row['uuid']; ?>', false)"></span>
         </li>
       <?php endwhile; ?>
     </ul>

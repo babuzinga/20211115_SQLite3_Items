@@ -113,7 +113,7 @@ function createPreviewObject(image, hs) {
   div.id = hs;
   span_remove.innerText = 'Не загружать';
   span_remove.className = 'remove';
-  span_remove.onclick= function() {
+  span_remove.onclick = function() {
     document.getElementById(hs).remove();
     delete images[hs];
   }

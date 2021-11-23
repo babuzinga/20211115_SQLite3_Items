@@ -16,8 +16,14 @@ h1 {
   margin: 30px 0;
 }
 
-a {
+a, .link {
   color: #1996bc;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover, .link:hover {
+  text-decoration: underline;
 }
 
 section {
@@ -147,8 +153,46 @@ ul.items_list li {
   margin: 5px 0;
 }
 
-ul.items_list .delete {
+ul.items_list li a {
   display: inline-block;
-  margin-left: 20px;
+  margin-right: 30px;
+}
+
+ul.items_list li span {
+  display: inline-block;
   cursor: pointer;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  top: 6px;
+}
+
+ul.items_list .rename {
+  background-image: url("/image/edit.svg");
+}
+
+ul.items_list .delete {
+  background-image: url("/image/trash-2.svg");
+}
+
+#rename {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.8);
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+#rename > div {
+  display: block;
+  position: relative;
+  margin: 50px auto;
+  background-color: white;
+  padding: 20px 20px 13px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: black 0 0 5px;
 }

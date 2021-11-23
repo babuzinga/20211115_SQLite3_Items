@@ -17,7 +17,7 @@
 
   <div>
     <input type="text" name="product_name" value="" placeholder="Название нового товара">
-    <button type="button" onclick="addItem('product', 'product_name', '<?= $_GET['u']; ?>')">Добавить</button>
+    <button type="button" onclick="controlItem('product', 'product_name', 'create', false, '<?= $_GET['u']; ?>')">Добавить</button>
   </div>
 
   <div>
@@ -28,14 +28,16 @@
           SELECT COUNT(images.uuid) AS cnt, products.* 
           FROM products 
           LEFT JOIN images ON images.product_uuid = products.uuid 
-          WHERE group_uuid = '{$uuid}'
+          WHERE group_uuid = '{$uuid}' AND products.status = 0
           GROUP BY products.uuid
         ");
         while ($row = $result->fetchArray()) :
       ?>
-        <li>
-          <a href="/product.php?u=<?= $row['uuid']; ?>"><?= $row['title'], !empty($row['cnt']) ? " ({$row['cnt']})" : ''; ?></a>
-          <span class='delete' onclick="deleteItem('product', '<?= $row['uuid']; ?>')">[ Удалить ]</span>
+        <li data-uuid="<?= $row['uuid']; ?>">
+          <?= !empty($row['cnt']) ? "[{$row['cnt']}]" : ''; ?>
+          <a href="/product.php?u=<?= $row['uuid']; ?>"><?= $row['title']; ?></a>
+          <span class='rename' onclick="renameItem('product', '<?= $row['uuid']; ?>')"></span>
+          <span class='delete' onclick="controlItem('product', false, 'delete', '<?= $row['uuid']; ?>', false)"></span>
         </li>
       <?php endwhile; ?>
     </ul>
