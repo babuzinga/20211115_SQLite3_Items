@@ -21,6 +21,7 @@ upload.onclick = () => {
         formData.append("images[" + key + "]", images[key], images[key].name);
       }
     }
+    formData.append("product_uuid", document.getElementById('product_uuid').value);
 
     // обработчик для отправки
     xmlHttp.upload.onprogress = function(event) {
@@ -40,8 +41,6 @@ upload.onclick = () => {
             delete images[name];
           }
         }
-      } else {
-        response.innerHTML = 'Upload error. Try again.';
       }
     }
     xmlHttp.open("post", "upload.php");

@@ -1,1 +1,9 @@
 Страница со списком альбомов (товаров) - добавление.редактирование.удаление
+
+
+
+
+
+drag_drop_file_input
+https://www.codingnepalweb.com/drag-drop-file-upload-feature-javascript/
+https://github.com/gitdagray/drag_drop_file_input/blob/main/js/main.js

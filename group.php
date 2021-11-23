@@ -24,11 +24,17 @@
     <ul id="product_list" class="items_list">
       <?php
         $uuid = $db->escapeString($_GET['u']);
-        $result = $db->query("SELECT * FROM products WHERE group_uuid = '{$uuid}'");
+        $result = $db->query("
+          SELECT COUNT(images.uuid) AS cnt, products.* 
+          FROM products 
+          LEFT JOIN images ON images.product_uuid = products.uuid 
+          WHERE group_uuid = '{$uuid}'
+          GROUP BY products.uuid
+        ");
         while ($row = $result->fetchArray()) :
       ?>
         <li>
-          <a href="/product.php?u=<?= $row['uuid']; ?>"><?= $row['title']; ?></a>
+          <a href="/product.php?u=<?= $row['uuid']; ?>"><?= $row['title'], !empty($row['cnt']) ? " ({$row['cnt']})" : ''; ?></a>
           <span class='delete' onclick="deleteItem('product', '<?= $row['uuid']; ?>')">[ Удалить ]</span>
         </li>
       <?php endwhile; ?>
