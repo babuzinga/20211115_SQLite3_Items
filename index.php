@@ -1,3 +1,4 @@
+<?php include_once __DIR__ . '/header.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,32 +7,38 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- https://www.codingnepalweb.com/drag-drop-file-upload-feature-javascript/ -->
-<!-- https://github.com/gitdagray/drag_drop_file_input/blob/main/js/main.js -->
 <section id="container">
-  <div class="drag-area">
-    <header>Перетащите и отпустите, чтобы загрузить изображение</header>
-    <span>или</span>
-    <button class="select">Нажмите чтобы выбрать файл</button>
-    <span>а после</span>
-    <button class="upload">Сохранить</button>
-    <input type="file" name="images" id="fileAjax" hidden multiple>
-  </div>
-  <div class="preview-area">
-    <?php
-    if (file_exists("23items.db")) {
-      $db = new SQLite3("23items.db");
-      $result = $db->query('SELECT * FROM images');
-      while ($row = $result->fetchArray()) {
-        echo "<div class='success'><img src='/uploads/{$row['name']}'/></div>";
-      }
-    }
-    ?>
-  </div>
-  <div class="response">
+  <h1>Группы</h1>
 
+  <div>
+    Groups
   </div>
-</section >
+
+  <div>
+    <input type="text" name="group_name" value="" placeholder="Название новой группы">
+    <button type="button" onclick="addItem('group', 'group_name', 0)">Добавить</button>
+  </div>
+
+  <div>
+    <ul id="group_list" class="items_list">
+      <?php
+        $result = $db->query('
+          SELECT COUNT(products.uuid) AS cnt, groups.* 
+          FROM groups 
+          LEFT JOIN products ON products.group_uuid = groups.uuid 
+          GROUP BY groups.uuid
+          ORDER BY groups.dt
+        ');
+        while ($row = $result->fetchArray()) :
+      ?>
+        <li>
+          <a href="/group.php?u=<?= $row['uuid']; ?>"><?= $row['title'], !empty($row['cnt']) ? " ({$row['cnt']})" : ''; ?></a>
+          <span class='delete' onclick="deleteItem('group', '<?= $row['uuid']; ?>')">[ Удалить ]</span>
+        </li>
+      <?php endwhile; ?>
+    </ul>
+  </div>
+</section>
 
 <script src="script.js"></script>
 </body>

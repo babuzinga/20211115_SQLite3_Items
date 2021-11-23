@@ -8,39 +8,66 @@
 }
 
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 2.2222em;
+  margin: 30px 0;
+}
+
+a {
+  color: #1996bc;
+}
+
+section {
+  display: block;
+  margin: 0 auto;
+  max-width: 600px;
+  min-width: 320px;
+  width: 100%;
+}
+
+section > div {
+  margin: 20px 0;
+  width: 100%;
+}
+
+section button {
+  padding: 10px 25px;
+  font-size: 1em;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 7px 0;
+  background-color: #0e9e25;
+}
+
+section input[type=text] {
+  padding: 10px 15px;
+  border: 1px solid #c5c5c5;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1em;
 }
 
 section .drag-area {
   border: 2px dashed #c4c4c4;
   height: 400px;
-  width: 600px;
+  width: 100%;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  margin: 30px 0;
 }
 
-section .drag-area button {
-  padding: 10px 25px;
-  font-size: 18px;
-  font-weight: 500;
-  border: none;
-  outline: none;
+section button.select {
   background-color: #3b84d2;
-  color: #ffffff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-section .drag-area button.upload {
-  background-color: #0e9e25;
 }
 
 section .drag-area.active {
@@ -49,30 +76,12 @@ section .drag-area.active {
 
 section .drag-area header,
 section .drag-area span {
-  font-size: 18px;
   font-weight: 500;
   color: #6f6f6f;
 }
 
 section .drag-area span {
   margin: 10px 0 15px 0;
-}
-
-section .drag-area img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-section .preview-area {
-  width: 600px;
-  margin: 0;
-}
-
-section .response {
-  width: 600px;
-  margin: 30px 0;
 }
 
 section .preview-area div {
@@ -106,19 +115,40 @@ section .preview-area div span {
   padding: 10px;
   text-align: center;
   width: 100%;
-  background-color: rgba(59, 132, 210, 0.2);
   cursor: pointer;
   color: white;
 }
 
-section .preview-area div span:hover {
+section .preview-area div span.remove {
+  background-color: rgba(59, 132, 210, 0.2);
+}
+
+section .preview-area div span.remove:hover {
   background-color: rgb(59, 132, 210);
+}
+
+section .preview-area div span.delete {
+  background-color: rgba(241, 22, 22, 0.2);
+}
+
+section .preview-area div span.delete:hover {
+  background-color: rgb(241, 22, 22);
 }
 
 section .preview-area div.success {
   background-color: #b3efb3;
 }
 
-section .preview-area div.success span {
+section .preview-area div.success span.remove {
   display: none;
+}
+
+ul.items_list li {
+  margin: 5px 0;
+}
+
+ul.items_list .delete {
+  display: inline-block;
+  margin-left: 20px;
+  cursor: pointer;
 }
